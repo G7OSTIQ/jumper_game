@@ -6,14 +6,17 @@ public class platform_script : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.relativeVelocity.y >= 0f)
+        // Check the collision came from ABOVE the platform
+        foreach (ContactPoint2D contact in collision.contacts)
         {
-            Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            if (rb != null)
+            if (contact.normal.y < -0.5f) // contact from top
             {
-                Vector2 velocity = rb.linearVelocity;
-                velocity.y = jumpForce;
-                rb.linearVelocity = velocity;
+                Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                }
+                break;
             }
         }
     }

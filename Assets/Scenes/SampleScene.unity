@@ -869,6 +869,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133cf8729ffb4464da1d79a4b52cc78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::game_manager
+  platformPrefab: {fileID: 3315595872134509365, guid: 432e4306131fb7c44890b1ce9bc60a1e, type: 3}
+  platformCount: 300
+  player: {fileID: 1064828643}
 --- !u!4 &1722183092
 Transform:
   m_ObjectHideFlags: 0
