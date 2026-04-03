@@ -1301,6 +1301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::game_manager
   platformPrefab: {fileID: 3315595872134509365, guid: 432e4306131fb7c44890b1ce9bc60a1e, type: 3}
+  movingPlatformPrefab: {fileID: 3315595872134509365, guid: 0f1a4db3200de9c4c987e8ea85730c96, type: 3}
   enemyPrefab: {fileID: 1262484541899056079, guid: c7ea1c5379b77064c91dee90b95a4e03, type: 3}
   platformCount: 300
   player: {fileID: 1064828643}

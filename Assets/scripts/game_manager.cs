@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class game_manager : MonoBehaviour
 {
     public GameObject platformPrefab;
+    public GameObject movingPlatformPrefab;
     public GameObject enemyPrefab;
     public int platformCount = 300;
     public Transform player;
@@ -20,11 +21,22 @@ public class game_manager : MonoBehaviour
             spawnPosition.y += Random.Range(1.2f, 2f);
             spawnPosition.x = Random.Range(-4f, 4f);
 
-            GameObject platform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+            GameObject platform;
+
+            // every 4th platform is a moving one
+            if (i > 5 && i % 4 == 0)
+            {
+                platform = Instantiate(movingPlatformPrefab, spawnPosition, Quaternion.identity);
+            }
+            else
+            {
+                platform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+            }
+
             spawnedPositions.Add(spawnPosition);
 
-            // spawn enemy
-            if (i > 5 && i % enemyEveryNPlatforms == 0)
+            // only spawn enemy on normal platforms
+            if (i > 5 && i % enemyEveryNPlatforms == 0 && i % 4 != 0)
             {
                 Vector3 enemyPos = new Vector3(spawnPosition.x, spawnPosition.y + 0.5f, 0f);
                 GameObject enemy = Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
