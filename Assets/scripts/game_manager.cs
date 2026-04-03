@@ -10,7 +10,7 @@ public class game_manager : MonoBehaviour
     public GameObject jellyfishPrefab;     // ✅ drag jellyfish prefab in Inspector
     public Transform player;
     public int enemyEveryNPlatforms = 5;
-    public int jellyfishEveryNPlatforms = 8; // ✅ tune how often jellyfish spawn
+    public int jellyfishEveryNPlatforms = 15; // ✅ tune how often jellyfish spawn
 
     private float nextSpawnY = 1f;
     private int platformIndex = 0;

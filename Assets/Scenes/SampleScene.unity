@@ -468,6 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Camera_follow
   target: {fileID: 1064828643}
   smoothSpeed: 5
+  downDriftSpeed: 0.5
 --- !u!1 &550654156
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,10 +890,10 @@ GameObject:
   - component: {fileID: 1064828643}
   - component: {fileID: 1064828642}
   - component: {fileID: 1064828641}
-  - component: {fileID: 1064828645}
   - component: {fileID: 1064828644}
   - component: {fileID: 1064828646}
-  m_Layer: 0
+  - component: {fileID: 1064828647}
+  m_Layer: 7
   m_Name: Player_bat
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1022,8 +1023,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &1064828645
-BoxCollider2D:
+--- !u!114 &1064828646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064828640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfefb2f11cab82b4698cf0ee227eb878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::player_script
+  speed: 10
+  rb: {fileID: 1064828644}
+--- !u!70 &1064828647
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1056,32 +1071,9 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.008187413, y: -0.106436454}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.86, y: 0.46}
-    newSize: {x: 0.86, y: 0.46}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.6405772, y: 0.24712707}
-  m_EdgeRadius: 0
---- !u!114 &1064828646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064828640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfefb2f11cab82b4698cf0ee227eb878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::player_script
-  speed: 10
-  rb: {fileID: 1064828644}
+  m_Offset: {x: -0.017962083, y: 0.019343806}
+  m_Size: {x: 0.44272384, y: 0.44272384}
+  m_Direction: 0
 --- !u!1 &1245632602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,7 +1598,7 @@ MonoBehaviour:
   jellyfishPrefab: {fileID: 1785709516579967773, guid: ad0b73abe0adfc542afae8e0325e4566, type: 3}
   player: {fileID: 1064828643}
   enemyEveryNPlatforms: 5
-  jellyfishEveryNPlatforms: 8
+  jellyfishEveryNPlatforms: 15
 --- !u!4 &1722183092
 Transform:
   m_ObjectHideFlags: 0

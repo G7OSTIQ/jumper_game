@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 4369653643690839076}
   - component: {fileID: 1496134293394655221}
   - component: {fileID: -2179061585138156149}
-  - component: {fileID: 24974041462233608}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: jelly_fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,33 +132,6 @@ MonoBehaviour:
   moveSpeed: 0.5
   sidewaysSpeed: 0.8
   sidewaysRange: 2
---- !u!50 &24974041462233608
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1785709516579967773}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!1 &3377197784834735123
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +143,7 @@ GameObject:
   - component: {fileID: 3332263784986445392}
   - component: {fileID: 5346232419697530572}
   - component: {fileID: 1212824588455502495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stinger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::jellyfish_part
   isHead: 0
+  boostForce: 15
 --- !u!1 &4901510624972496236
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +227,7 @@ GameObject:
   - component: {fileID: 5134375402421075384}
   - component: {fileID: 6925346764778866928}
   - component: {fileID: 3891740107308421600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +279,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -325,3 +298,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::jellyfish_part
   isHead: 1
+  boostForce: 15
