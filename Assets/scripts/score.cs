@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class score : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText; // drag your UI text in Inspector
+    public static score instance; // ✅ so other scripts can access it
+    public TextMeshProUGUI scoreText;
     private float highestY;
-    private float meter;
+    public float meter;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -14,11 +20,10 @@ public class score : MonoBehaviour
 
     void Update()
     {
-        // Only increase score when camera goes higher
         if (Camera.main.transform.position.y > highestY)
         {
             highestY = Camera.main.transform.position.y;
-            meter = Mathf.RoundToInt(highestY * 10f); // multiply to get bigger numbers
+            meter = Mathf.RoundToInt(highestY * 10f);
         }
 
         scoreText.text = meter + "m";
