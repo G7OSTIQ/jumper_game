@@ -302,7 +302,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2394094334367876995, guid: d8ecf68bf53e7404aa9aa3f0ba28c5b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1546,7 +1546,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2394094334367876995, guid: d8ecf68bf53e7404aa9aa3f0ba28c5b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1603,8 +1603,10 @@ MonoBehaviour:
   platformPrefab: {fileID: 3315595872134509365, guid: 432e4306131fb7c44890b1ce9bc60a1e, type: 3}
   movingPlatformPrefab: {fileID: 3315595872134509365, guid: 0f1a4db3200de9c4c987e8ea85730c96, type: 3}
   enemyPrefab: {fileID: 1262484541899056079, guid: c7ea1c5379b77064c91dee90b95a4e03, type: 3}
+  jellyfishPrefab: {fileID: 1785709516579967773, guid: ad0b73abe0adfc542afae8e0325e4566, type: 3}
   player: {fileID: 1064828643}
   enemyEveryNPlatforms: 5
+  jellyfishEveryNPlatforms: 8
 --- !u!4 &1722183092
 Transform:
   m_ObjectHideFlags: 0

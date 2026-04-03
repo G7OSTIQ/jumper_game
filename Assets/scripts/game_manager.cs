@@ -7,19 +7,21 @@ public class game_manager : MonoBehaviour
     public GameObject platformPrefab;
     public GameObject movingPlatformPrefab;
     public GameObject enemyPrefab;
+    public GameObject jellyfishPrefab;     // ✅ drag jellyfish prefab in Inspector
     public Transform player;
     public int enemyEveryNPlatforms = 5;
+    public int jellyfishEveryNPlatforms = 8; // ✅ tune how often jellyfish spawn
 
     private float nextSpawnY = 1f;
     private int platformIndex = 0;
-    private float spawnAheadDistance = 30f;  // how far above camera to keep spawning
-    private float despawnBelowDistance = 20f; // how far below camera to destroy
+    private float spawnAheadDistance = 30f;
+    private float despawnBelowDistance = 20f;
 
     private List<GameObject> activePlatforms = new List<GameObject>();
+    private List<GameObject> activeJellyfish = new List<GameObject>(); // ✅ track jellyfish
 
     void Start()
     {
-        // spawn initial batch of platforms to fill the screen
         while (nextSpawnY < spawnAheadDistance)
         {
             SpawnPlatformRow();
@@ -31,7 +33,6 @@ public class game_manager : MonoBehaviour
         float cameraTop = Camera.main.transform.position.y + Camera.main.orthographicSize;
         float cameraBottom = Camera.main.transform.position.y - Camera.main.orthographicSize;
 
-        // keep spawning platforms above camera
         while (nextSpawnY < cameraTop + spawnAheadDistance)
         {
             SpawnPlatformRow();
@@ -40,12 +41,7 @@ public class game_manager : MonoBehaviour
         // destroy platforms too far below camera
         for (int i = activePlatforms.Count - 1; i >= 0; i--)
         {
-            if (activePlatforms[i] == null)
-            {
-                activePlatforms.RemoveAt(i);
-                continue;
-            }
-
+            if (activePlatforms[i] == null) { activePlatforms.RemoveAt(i); continue; }
             if (activePlatforms[i].transform.position.y < cameraBottom - despawnBelowDistance)
             {
                 Destroy(activePlatforms[i]);
@@ -53,9 +49,18 @@ public class game_manager : MonoBehaviour
             }
         }
 
-        // game over if player falls below camera
-        float bottomOfCamera = cameraBottom;
-        if (player.position.y < bottomOfCamera)
+        // ✅ destroy jellyfish too far below camera
+        for (int i = activeJellyfish.Count - 1; i >= 0; i--)
+        {
+            if (activeJellyfish[i] == null) { activeJellyfish.RemoveAt(i); continue; }
+            if (activeJellyfish[i].transform.position.y < cameraBottom - despawnBelowDistance)
+            {
+                Destroy(activeJellyfish[i]);
+                activeJellyfish.RemoveAt(i);
+            }
+        }
+
+        if (player.position.y < cameraBottom)
         {
             GameOver();
         }
@@ -69,7 +74,6 @@ public class game_manager : MonoBehaviour
 
         GameObject platform;
 
-        // every 4th platform is moving
         if (platformIndex > 5 && platformIndex % 4 == 0)
         {
             platform = Instantiate(movingPlatformPrefab, spawnPosition, Quaternion.identity);
@@ -81,7 +85,6 @@ public class game_manager : MonoBehaviour
 
         activePlatforms.Add(platform);
 
-        // spawn enemy on normal platforms only
         if (platformIndex > 5 && platformIndex % enemyEveryNPlatforms == 0 && platformIndex % 4 != 0)
         {
             Vector3 enemyPos = new Vector3(spawnX, nextSpawnY + 0.5f, 0f);
@@ -89,7 +92,18 @@ public class game_manager : MonoBehaviour
             enemy.transform.SetParent(platform.transform);
         }
 
-        // spawn extra platform nearby
+        // ✅ spawn jellyfish between platforms, not on them
+        if (platformIndex > 8 && platformIndex % jellyfishEveryNPlatforms == 0)
+        {
+            Vector3 jellyPos = new Vector3(
+                Random.Range(-3f, 3f),
+                nextSpawnY + Random.Range(1f, 2f), // float above platform
+                0f
+            );
+            GameObject jelly = Instantiate(jellyfishPrefab, jellyPos, Quaternion.identity);
+            activeJellyfish.Add(jelly); // ✅ track it for cleanup
+        }
+
         if (platformIndex % 3 == 0)
         {
             Vector3 extraPos = new Vector3(
@@ -98,7 +112,6 @@ public class game_manager : MonoBehaviour
                 0f
             );
 
-            // make sure it's not too close to the main one
             if (Mathf.Abs(extraPos.x - spawnX) > 1.5f)
             {
                 GameObject extra = Instantiate(platformPrefab, extraPos, Quaternion.identity);
