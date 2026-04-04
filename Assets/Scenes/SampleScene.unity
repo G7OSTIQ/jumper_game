@@ -1071,8 +1071,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.017962083, y: 0.019343806}
-  m_Size: {x: 0.44272384, y: 0.44272384}
+  m_Offset: {x: -0.008065064, y: -0.0070484215}
+  m_Size: {x: 0.3965376, y: 0.39653766}
   m_Direction: 0
 --- !u!1 &1245632602
 GameObject:
@@ -1626,6 +1626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24788e07d305a3a4e8484d3e29c248b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::score
+  scoreUI: {fileID: 2111041636}
   scoreText: {fileID: 2111041638}
   meter: 0
 --- !u!1 &1825671815

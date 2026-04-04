@@ -7,18 +7,19 @@ public class game_manager : MonoBehaviour
     public GameObject platformPrefab;
     public GameObject movingPlatformPrefab;
     public GameObject enemyPrefab;
-    public GameObject jellyfishPrefab;     // ✅ drag jellyfish prefab in Inspector
+    public GameObject jellyfishPrefab;
     public Transform player;
     public int enemyEveryNPlatforms = 5;
-    public int jellyfishEveryNPlatforms = 15; // ✅ tune how often jellyfish spawn
+    public int jellyfishEveryNPlatforms = 15;
 
     private float nextSpawnY = 1f;
     private int platformIndex = 0;
     private float spawnAheadDistance = 30f;
     private float despawnBelowDistance = 20f;
+    private bool isGameOver = false; // ✅ prevent calling GameOver every frame
 
     private List<GameObject> activePlatforms = new List<GameObject>();
-    private List<GameObject> activeJellyfish = new List<GameObject>(); // ✅ track jellyfish
+    private List<GameObject> activeJellyfish = new List<GameObject>();
 
     void Start()
     {
@@ -30,6 +31,8 @@ public class game_manager : MonoBehaviour
 
     void Update()
     {
+        if (isGameOver) return; // ✅ stop everything if game is over
+
         float cameraTop = Camera.main.transform.position.y + Camera.main.orthographicSize;
         float cameraBottom = Camera.main.transform.position.y - Camera.main.orthographicSize;
 
@@ -49,7 +52,7 @@ public class game_manager : MonoBehaviour
             }
         }
 
-        // ✅ destroy jellyfish too far below camera
+        // destroy jellyfish too far below camera
         for (int i = activeJellyfish.Count - 1; i >= 0; i--)
         {
             if (activeJellyfish[i] == null) { activeJellyfish.RemoveAt(i); continue; }
@@ -92,16 +95,15 @@ public class game_manager : MonoBehaviour
             enemy.transform.SetParent(platform.transform);
         }
 
-        // ✅ spawn jellyfish between platforms, not on them
         if (platformIndex > 8 && platformIndex % jellyfishEveryNPlatforms == 0)
         {
             Vector3 jellyPos = new Vector3(
                 Random.Range(-3f, 3f),
-                nextSpawnY + Random.Range(1f, 2f), // float above platform
+                nextSpawnY + Random.Range(1f, 2f),
                 0f
             );
             GameObject jelly = Instantiate(jellyfishPrefab, jellyPos, Quaternion.identity);
-            activeJellyfish.Add(jelly); // ✅ track it for cleanup
+            activeJellyfish.Add(jelly);
         }
 
         if (platformIndex % 3 == 0)
@@ -124,6 +126,7 @@ public class game_manager : MonoBehaviour
 
     void GameOver()
     {
+        isGameOver = true; // ✅ set flag first
         game_over_manager.instance.ShowGameOver();
     }
 }

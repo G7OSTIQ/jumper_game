@@ -4,6 +4,7 @@ using UnityEngine;
 public class score : MonoBehaviour
 {
     public static score instance; // ✅ so other scripts can access it
+    public GameObject scoreUI;
     public TextMeshProUGUI scoreText;
     private float highestY;
     public float meter;
@@ -27,5 +28,10 @@ public class score : MonoBehaviour
         }
 
         scoreText.text = meter + "m";
+    }
+    
+    public void HideScoreUI()
+    {
+        scoreUI.SetActive(false); // ✅ hides the score UI
     }
 }
