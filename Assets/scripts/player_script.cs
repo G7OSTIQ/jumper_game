@@ -36,4 +36,14 @@ public class player_script : MonoBehaviour
         float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
         transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("HIT: " + other.gameObject.name + " tag: " + other.tag);
+        if (other.CompareTag("spiderwall"))
+        {
+            game_over_manager.instance.ShowGameOver();
+        }
+    }
+    
 }
